@@ -59,7 +59,7 @@
 <body class="text-slate-800">
 
     <!-- ENCABEZADO FIJO -->
-    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-lg shadow-md">
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-lg shadow-md dark:bg-gray-900 dark:text-gray-100">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center gap-4">
                 <svg class="w-12 h-12 text-black" viewBox="0 0 1024 1024" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M512 438.8c-40.6 0-73.6 33-73.6 73.6s33 73.6 73.6 73.6 73.6-33 73.6-73.6-33-73.6-73.6-73.6z"></path><path d="m512 168.4-156.4 89.8v179.4l156.4 90.4 156.4-90.4V258.2L512 168.4zm-64 126.2 64-36.8 64 36.8v73.6l-64 36.8-64-36.8V294.6z"></path><path d="m355.6 579.8-156.4 90.4V849.6L355.6 760V579.8zm212.8 281.8L412 771.2V591.8l156.4-90.4v179.4l-56.4 32.6zM822.8 760l156.4-89.8V490.8l-156.4 90.4V760z"></path></g></svg>
@@ -68,8 +68,18 @@
                      <p class="text-sm text-gray-600 hidden md:block">Análisis Inteligente con Gemini ✨</p>
                 </div>
             </div>
-             <div class="text-right">
-                <span class="text-sm font-semibold bg-sky-100 text-sky-800 px-3 py-1 rounded-full">Vigencia: 6 años</span>
+            <div class="text-right flex items-center gap-2">
+                <span class="text-sm font-semibold bg-sky-100 text-sky-800 px-3 py-1 rounded-full dark:bg-sky-900 dark:text-sky-200">Vigencia: 6 años</span>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-7.364l-1.414 1.414M6.05 17.95l-1.414 1.414M17.95 17.95l-1.414-1.414M6.05 6.05L4.636 7.464M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                </button>
+                <button id="settings-button" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3a2.25 2.25 0 014.5 0v.505a7.501 7.501 0 012.772 1.602l.357-.206a2.25 2.25 0 112.25 3.897l-.357.207a7.47 7.47 0 010 3.204l.357.207a2.25 2.25 0 11-2.25 3.897l-.357-.206A7.501 7.501 0 0114.25 20.5v.25a2.25 2.25 0 11-4.5 0v-.25a7.501 7.501 0 01-2.772-1.602l-.357.206a2.25 2.25 0 11-2.25-3.897l.357-.207a7.47 7.47 0 010-3.204l-.357-.207a2.25 2.25 0 112.25-3.897l.357.206A7.501 7.501 0 019.75 3.505V3z" />
+                    </svg>
+                </button>
             </div>
         </div>
     </header>
@@ -219,6 +229,21 @@
         </div>
     </div>
 
+    <!-- MODAL DE CONFIGURACIÓN -->
+    <div id="settings-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 w-full max-w-md rounded-2xl shadow-2xl p-6 md:p-8 relative transform transition-transform scale-95">
+            <button id="settings-close-button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h2 class="text-xl font-bold mb-4">Configuración</h2>
+            <div class="mb-4">
+                <label for="api-key-input" class="block text-sm font-medium mb-1">API Key de Gemini</label>
+                <input type="password" id="api-key-input" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600" placeholder="Introduce tu API key" />
+            </div>
+            <button id="save-api-key" class="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors">Guardar</button>
+        </div>
+    </div>
+
 
     <script>
         // Script para animaciones de entrada
@@ -240,6 +265,13 @@
         const closeButton = document.getElementById('gemini-close-button');
         const spinnerText = document.getElementById('gemini-spinner');
         const responseText = document.getElementById('gemini-response-text');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const settingsButton = document.getElementById('settings-button');
+        const settingsModal = document.getElementById('settings-modal');
+        const settingsCloseButton = document.getElementById('settings-close-button');
+        const apiKeyInput = document.getElementById('api-key-input');
+        const saveApiKeyButton = document.getElementById('save-api-key');
 
         // Función para mostrar el modal
         const showModal = (title) => {
@@ -264,12 +296,54 @@
                 hideModal();
             }
         });
+
+        // Tema oscuro
+        const moonIcon = '<path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />';
+        const sunIcon = '<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-7.364l-1.414 1.414M6.05 17.95l-1.414 1.414M17.95 17.95l-1.414-1.414M6.05 6.05L4.636 7.464M12 8a4 4 0 100 8 4 4 0 000-8z" />';
+
+        const applyTheme = (theme) => {
+            document.documentElement.classList.toggle('dark', theme === 'dark');
+            themeIcon.innerHTML = theme === 'dark' ? moonIcon : sunIcon;
+        };
+
+        let currentTheme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        applyTheme(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+            applyTheme(currentTheme);
+        });
+
+        // Configuración de API Key
+        apiKeyInput.value = localStorage.getItem('geminiApiKey') || '';
+        settingsButton.addEventListener('click', () => {
+            settingsModal.classList.remove('hidden');
+            setTimeout(() => settingsModal.classList.add('opacity-100'), 10);
+        });
+        const hideSettings = () => {
+            settingsModal.classList.remove('opacity-100');
+            setTimeout(() => settingsModal.classList.add('hidden'), 300);
+        };
+        settingsCloseButton.addEventListener('click', hideSettings);
+        settingsModal.addEventListener('click', (e) => {
+            if (e.target === settingsModal) hideSettings();
+        });
+        saveApiKeyButton.addEventListener('click', () => {
+            localStorage.setItem('geminiApiKey', apiKeyInput.value.trim());
+            hideSettings();
+        });
         
         // Función de llamada a la API de Gemini
         const callGemini = async (prompt) => {
           let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
           const payload = { contents: chatHistory };
-          const apiKey = "";
+          const apiKey = localStorage.getItem('geminiApiKey') || '';
+          if (!apiKey) {
+            alert('Configura tu API key de Gemini en el men\u00fa de ajustes.');
+            return 'API key no configurada.';
+          }
           const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
         
           try {
