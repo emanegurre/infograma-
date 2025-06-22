@@ -320,7 +320,10 @@
         apiKeyInput.value = localStorage.getItem('geminiApiKey') || '';
         settingsButton.addEventListener('click', () => {
             settingsModal.classList.remove('hidden');
-            setTimeout(() => settingsModal.classList.add('opacity-100'), 10);
+            setTimeout(() => {
+                settingsModal.classList.add('opacity-100');
+                settingsModal.querySelector('div').classList.add('scale-100');
+            }, 10);
         });
         const hideSettings = () => {
             settingsModal.classList.remove('opacity-100');
